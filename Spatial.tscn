@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://ak47/AK48.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ak47/AK47.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Grass03_Base Color.jpg" type="Texture" id=2]
 [ext_resource path="res://Enemy1.gd" type="Script" id=3]
 [ext_resource path="res://Companion_bot/Companion_bot.tscn" type="PackedScene" id=4]
@@ -51,6 +51,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.8081, 0 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.742094, -0.0540349 )
 shape = SubResource( 4 )
 
 [node name="Camera" type="Camera" parent="Player"]
@@ -60,9 +61,10 @@ far = 250.0
 script = ExtResource( 9 )
 
 [node name="AK 47" parent="Player" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15582, 0 )
 
 [node name="Companion_bot" parent="Player" instance=ExtResource( 4 )]
-transform = Transform( -0.978717, 0, 0.205214, 0, 1, 0, -0.205214, 0, -0.978717, 0.5234, -3.92549, 1.06149 )
+transform = Transform( -0.978717, 0, 0.205214, 0, 1, 0, -0.205214, 0, -0.978717, 0.5234, -1.71401, 1.06149 )
 
 [node name="Skybox" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )

@@ -54,6 +54,7 @@ func resolve_input():
 	if Input.is_action_just_released("aim"):
 		gun1.reset_rotation()
 		camera1.make_current()
+		gun1.focus(false)
 	if Input.is_action_just_pressed("focus"):
 		gun1.focus(true)
 	if Input.is_action_just_released("focus"):

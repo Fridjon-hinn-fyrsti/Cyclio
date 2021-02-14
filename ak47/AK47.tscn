@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://ak47/AK 47.gd" type="Script" id=1]
+[ext_resource path="res://ak47/AK47.gd" type="Script" id=1]
 [ext_resource path="res://ak47/AK 47.fbx" type="PackedScene" id=2]
 [ext_resource path="res://ak47/ak47_reload.wav" type="AudioStream" id=3]
 [ext_resource path="res://Glock-18 Slideback.wav" type="AudioStream" id=4]
@@ -34,6 +34,47 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 0.5, 0.5 ),
 "update": 0,
 "values": [ Vector3( 1.265, 0.283, -0.326 ), Vector3( 1.265, 0.283, -0.61 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Focused_fire"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.26, -0.349, -0.519 ), Vector3( 1.26, -0.392958, -0.453812 ), Vector3( 1.26, -0.349, -0.519 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Model:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.01, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 2, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Muzzle_flash:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.01, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 12.0, 0.0 ]
 }
 
 [node name="AK 47" type="Spatial"]
@@ -92,4 +133,5 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fire_gun = ExtResource( 7 )
 anims/Focus = SubResource( 1 )
+anims/Focused_fire = SubResource( 2 )
 anims/Reload_gun = ExtResource( 6 )

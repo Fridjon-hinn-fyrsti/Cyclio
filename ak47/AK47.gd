@@ -23,7 +23,10 @@ func shoot():
 					var target = raycast.get_collider()
 					if target.is_in_group("Enemies"):
 						target.hit(raycast.get_collision_normal())
-				animator.play("Fire_gun")
+				if focused:
+					animator.play("Focused_fire")
+				else:
+					animator.play("Fire_gun")
 		else:
 			if not emptyclip.playing:
 				emptyclip.play()

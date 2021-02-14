@@ -10,11 +10,11 @@ extends Spatial
 func _ready():
 	pass
 	#spawn evil bot
-#	var evil_bot = preload("res://Evil_bot/Evil_bot.tscn")
-#	for i in range(10):
-#		var obj = evil_bot.instance()
-#		obj.translation = Vector3(40,40,40)
-#		add_child(obj)
+	var evil_bot = preload("res://Evil_bot/Evil_bot.tscn")
+	for i in range(10):
+		var obj = evil_bot.instance()
+		obj.translation = Vector3(40,40,40)
+		add_child(obj)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
