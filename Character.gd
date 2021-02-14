@@ -6,6 +6,8 @@ var gravity = Vector3.DOWN
 var speed = 4
 var velocity = Vector3()
 onready var planet = get_parent().get_node("Planet")
+onready var camera1 = get_node("Camera")
+onready var gun1 = get_node("AK 47")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -51,14 +53,21 @@ func resolve_input():
 	if Input.is_action_just_pressed("movement_jump"):
 		velocity += jump_force* global_transform.basis.y
 
+	if Input.is_action_just_pressed("aim"):
+		camera1.aim_down_sights(true)
+	if Input.is_action_just_released("aim"):
+		camera1.aim_down_sights(false)
 	if Input.is_action_pressed("fire"):
-		print("bang")
+		gun1.shoot()
+	if Input.is_action_just_pressed("reload"):
+		gun1.reload()
 	if Input.is_action_pressed("close"):
 		get_tree().quit()
 		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 	# Replace with function body.
 	
 func _input(event):

@@ -1,8 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Character.gd" type="Script" id=1]
+[ext_resource path="res://ak47-1.wav" type="AudioStream" id=1]
 [ext_resource path="res://Grass03_Base Color.jpg" type="Texture" id=2]
-[ext_resource path="res://Camera.gd" type="Script" id=3]
+[ext_resource path="res://Glock-18 Slideback.wav" type="AudioStream" id=3]
+[ext_resource path="res://ak47_reload.wav" type="AudioStream" id=4]
+[ext_resource path="res://Fire_gun.tres" type="Animation" id=5]
+[ext_resource path="res://Character.gd" type="Script" id=6]
+[ext_resource path="res://AK 47.fbx" type="PackedScene" id=7]
+[ext_resource path="res://Aim_down_sights.tres" type="Animation" id=8]
+[ext_resource path="res://Camera.gd" type="Script" id=9]
+[ext_resource path="res://AK 47.gd" type="Script" id=10]
+[ext_resource path="res://Reload_gun.tres" type="Animation" id=11]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -12,7 +20,7 @@ albedo_texture = ExtResource( 2 )
 
 [sub_resource type="SphereShape" id=3]
 
-[sub_resource type="CylinderMesh" id=6]
+[sub_resource type="CylinderMesh" id=4]
 
 [sub_resource type="SphereShape" id=5]
 
@@ -30,15 +38,48 @@ shape = SubResource( 3 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.8081, 0 )
-script = ExtResource( 1 )
+script = ExtResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Player"]
-mesh = SubResource( 6 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 shape = SubResource( 5 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 11.751, 12.1064 )
-script = ExtResource( 3 )
+[node name="Camera" type="Camera" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 0.994379, 0.105882, 0, -0.105882, 0.994379, 0, 0.33987, 10.0588 )
+fov = 90.0
+script = ExtResource( 9 )
+
+[node name="AK 47" parent="Player" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.26, -0.349, -0.519 )
+script = ExtResource( 10 )
+
+[node name="Fire_gun" type="AudioStreamPlayer3D" parent="Player/AK 47"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.986515, 1.12261 )
+stream = ExtResource( 1 )
+max_db = -4.0
+attenuation_filter_cutoff_hz = 15000.0
+attenuation_filter_db = -12.0
+
+[node name="Empty_clip" type="AudioStreamPlayer3D" parent="Player/AK 47"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.11353, 1.71754 )
+stream = ExtResource( 3 )
+attenuation_filter_cutoff_hz = 12000.0
+attenuation_filter_db = -8.0
+
+[node name="Reload" type="AudioStreamPlayer3D" parent="Player/AK 47"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.818802, 0 )
+stream = ExtResource( 4 )
+attenuation_filter_cutoff_hz = 12000.0
+attenuation_filter_db = -8.0
+
+[node name="RayCast" type="RayCast" parent="Player/AK 47"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0389299, 0.777023, -4.66424 )
+cast_to = Vector3( 0, 0, -200 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+anims/Aim_down_sights = ExtResource( 8 )
+anims/Fire_gun = ExtResource( 5 )
+anims/Reload_gun = ExtResource( 11 )

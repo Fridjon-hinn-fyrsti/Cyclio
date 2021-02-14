@@ -5,11 +5,13 @@ extends Camera
 # var a = 2
 # var b = "text"
 
-var distance = 4
+onready var animations = get_parent().get_node("AnimationPlayer")
 
-onready var player = get_parent().get_node("Player")
-
-
+func aim_down_sights(zoom_in):
+	if zoom_in:
+		animations.play("Aim_down_sights")
+	else:
+		animations.play_backwards("Aim_down_sights")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +19,6 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	transform = player.transform
-	transform.origin = transform.origin + transform.basis.z*10
+#func _process(delta):
+#	transform = player.transform
+#	transform.origin = transform.origin + transform.basis.z*10
