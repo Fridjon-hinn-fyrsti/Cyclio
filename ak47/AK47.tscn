@@ -8,9 +8,6 @@
 [ext_resource path="res://ak47/Reload_gun.tres" type="Animation" id=6]
 [ext_resource path="res://ak47/Fire_gun.tres" type="Animation" id=7]
 
-
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Focus"
 length = 0.3
@@ -164,10 +161,11 @@ fov = 60.0
 far = 350.0
 
 [node name="Bullet_counter" type="Label" parent="."]
-margin_left = 930.0
-margin_top = 547.0
-margin_right = 1009.0
-margin_bottom = 581.0
+margin_left = 771.179
+margin_top = 539.508
+margin_right = 850.179
+margin_bottom = 573.508
+rect_scale = Vector2( 3, 3 )
 text = "30/30"
 align = 2
 __meta__ = {
