@@ -48,17 +48,18 @@ func is_focused():
 	return focused
 		
 func focus(on):
-	if is_scoped():
-		if on:
-			animator.play("Focus")
-			focused = true
-		elif is_focused():
-			animator.play_backwards("Focus")
-			focused = false
+	if reloadsound.playing:
+		print_debug("eyeye")
+		animator.play("Reset")
+	if on:
+		animator.play("Focus")
+		focused = true
+	else:
+		animator.play_backwards("Focus")
+		focused = false
 
 func reset_rotation():
 	rotation.x = x_rot
-		
 		
 func _input(event):
 	if event is InputEventMouseMotion and is_scoped():
