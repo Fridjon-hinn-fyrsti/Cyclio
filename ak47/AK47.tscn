@@ -8,7 +8,6 @@
 [ext_resource path="res://Reload_gun.tres" type="Animation" id=6]
 [ext_resource path="res://Fire_gun.tres" type="Animation" id=7]
 
-<<<<<<< HEAD:AK47.tscn
 [sub_resource type="Animation" id=1]
 resource_name = "Focus"
 length = 0.3
@@ -36,8 +35,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( 1.265, 0.283, -0.326 ), Vector3( 1.265, 0.283, -0.61 ) ]
 }
-=======
->>>>>>> a546e137d2a1a7d2929dced474efa25f95a09916:ak47/AK47.tscn
 
 [node name="AK 47" type="Spatial"]
 script = ExtResource( 1 )
