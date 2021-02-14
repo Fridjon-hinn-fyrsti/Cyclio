@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://AK 47.gd" type="Script" id=1]
+[ext_resource path="res://AK 47.fbx" type="PackedScene" id=2]
+[ext_resource path="res://ak47_reload.wav" type="AudioStream" id=3]
+[ext_resource path="res://Glock-18 Slideback.wav" type="AudioStream" id=4]
+[ext_resource path="res://ak47-1.wav" type="AudioStream" id=5]
+[ext_resource path="res://Reload_gun.tres" type="Animation" id=6]
+[ext_resource path="res://Fire_gun.tres" type="Animation" id=7]
+
+[node name="AK 47" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Model" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.26, -0.349, -0.519 )
+
+[node name="RayCast" type="RayCast" parent="Model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00508487, 1.22895, -4.43022 )
+enabled = true
+cast_to = Vector3( 0, 0, -200 )
+
+[node name="Fire_gun" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26, 0.144257, 0.042305 )
+stream = ExtResource( 5 )
+max_db = -12.0
+attenuation_filter_cutoff_hz = 15000.0
+attenuation_filter_db = -12.0
+
+[node name="Empty_clip" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26, 0.207764, 0.33977 )
+stream = ExtResource( 4 )
+attenuation_filter_cutoff_hz = 12000.0
+attenuation_filter_db = -8.0
+
+[node name="Reload" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26, 0.0604, -0.519 )
+stream = ExtResource( 3 )
+attenuation_filter_cutoff_hz = 12000.0
+attenuation_filter_db = -8.0
+
+[node name="Muzzle_flash" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26, 0.0308743, -2.92132 )
+light_color = Color( 1, 0.815686, 0.556863, 1 )
+light_energy = 0.0
+spot_range = 50.0
+spot_angle = 135.8
+
+[node name="FPS_camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.265, 0.283, -0.326 )
+fov = 60.0
+
+[node name="Bullet_counter" type="Label" parent="."]
+margin_left = 930.0
+margin_top = 547.0
+margin_right = 1009.0
+margin_bottom = 581.0
+text = "30/30"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fire_gun = ExtResource( 7 )
+anims/Reload_gun = ExtResource( 6 )

@@ -1,10 +1,12 @@
 extends Spatial
 
+var x_rot = rotation.x
+
 onready var gunfire = get_node("Fire_gun")
 onready var emptyclip = get_node("Empty_clip")
 onready var reloadsound = get_node("Reload")
-onready var animator = get_parent().get_node("AnimationPlayer")
-onready var raycast = get_node("RayCast")
+onready var animator = get_node("AnimationPlayer")
+onready var raycast = get_node("Model/RayCast")
 onready var bullet_counter = get_node("Bullet_counter")
 
 var bullets = 30
@@ -35,6 +37,16 @@ func reload():
 		bullets = 30
 		update_counter()
 
+func reset_rotation():
+	rotation.x = x_rot
+		
+		
+func _input(event):
+	if event is InputEventMouseMotion and get_node("FPS_camera").current:
+		var movement = event.relative
+		var sensitivity = 0.1
+		rotation.x -= deg2rad(movement.y * sensitivity) #*cos(rotation.z)
+		#rotation.y -= deg2rad(movement.x * sensitivity)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

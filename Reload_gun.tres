@@ -3,7 +3,7 @@
 [resource]
 resource_name = "Reload_gun"
 tracks/0/type = "value"
-tracks/0/path = NodePath("AK 47/Model:rotation_degrees")
+tracks/0/path = NodePath("Model:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -12,10 +12,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.8, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 20, 0, 0 ), Vector3( 20, 0, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 1.26, -0.349, -0.519 ), Vector3( 1.26, -0.4, -0.451 ), Vector3( 1.26, -0.4, -0.451 ), Vector3( 1.26, -0.349, -0.519 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AK 47/Model:translation")
+tracks/1/path = NodePath("Model:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -24,5 +24,5 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.8, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1.26, -0.349, -0.519 ), Vector3( 1.26, -0.4, -0.451 ), Vector3( 1.26, -0.4, -0.451 ), Vector3( 1.26, -0.349, -0.519 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 20, 0, 0 ), Vector3( 20, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }

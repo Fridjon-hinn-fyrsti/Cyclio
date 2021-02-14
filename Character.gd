@@ -43,11 +43,10 @@ func resolve_input():
 			velocity += jump_force* global_transform.basis.y
 
 	if Input.is_action_just_pressed("aim"):
-		scoped = true
-		camera1.aim_down_sights(scoped)
+		gun1.get_node("FPS_camera").make_current()
 	if Input.is_action_just_released("aim"):
-		scoped = false
-		camera1.aim_down_sights(scoped)
+		gun1.reset_rotation()
+		camera1.make_current()
 	if Input.is_action_pressed("fire"):
 		gun1.shoot()
 	if Input.is_action_just_pressed("reload"):
@@ -61,9 +60,10 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion:
 		var movement = event.relative
-		transform.basis = transform.basis.rotated(transform.basis.y, deg2rad(-movement.x * 0.2))
-		if scoped:   # TODO: Allow vertical mouse movement when scoped
-			pass
-			#transform.basis = transform.basis.rotated(transform.basis.x, deg2rad(-movement.y * 0.2))
+		var sensitivity = 0.2
+		if not camera1.current:
+			sensitivity = 0.1
+		transform.basis = transform.basis.rotated(transform.basis.y, deg2rad(-movement.x * sensitivity))
+		#transform.basis = transform.basis.rotated(transform.basis.x, deg2rad(-movement.y * 0.2))
 		#rotation.x -= deg2rad(movement.y * 0.2)*cos(rotation.z)
 		#rotation.z -= deg2rad(movement.y * 0.2)*sin(rotation.y)
