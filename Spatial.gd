@@ -10,6 +10,7 @@ extends Spatial
 var trees = [preload("res://Trees/Tree1.tscn"),preload("res://Trees/Tree2.tscn"),preload("res://Trees/Tree3.tscn"),preload("res://Trees/Tree4.tscn"),preload("res://Trees/Tree5.tscn"),preload("res://Trees/Tree6.tscn")]
 onready var planet = get_node("Planet")
 var rng = RandomNumberGenerator.new()
+var bot_count = 10
 onready var R = 100
 
 
@@ -38,7 +39,7 @@ func _ready():
 		add_child(obj)
 	#spawn evil bot
 	var evil_bot = preload("res://Evil_bot/Evil_bot.tscn")
-	for i in range(10):
+	for i in range(bot_count):
 		var obj = evil_bot.instance()
 		obj.translation = Vector3(40,40,40)
 		add_child(obj)
@@ -46,10 +47,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var dead = 0
 	for child in get_children():
+		if child.is_in_group("Enemies"):
+			if child.is_dead():
+				dead += 1
 		if child is KinematicBody:
 			var vec = (planet.translation - child.translation).normalized()
 			child.move_and_slide(vec*delta*100)
 		if child is RigidBody:
 			var vec = (planet.translation - child.translation).normalized()
 			child.add_central_force(vec*delta*1000)
+			
+	get_node("Killcount").text = "%s/%s robots dead!" % [dead, bot_count]

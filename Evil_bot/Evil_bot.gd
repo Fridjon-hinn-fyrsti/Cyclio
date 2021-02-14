@@ -22,7 +22,9 @@ func fix_angle():
 	transform.basis.z = transform.basis.y.rotated(transform.basis.x, deg2rad(90))
 	transform.basis.x = transform.basis.y.cross(transform.basis.z)
 	transform = transform.orthonormalized()
-
+	
+func is_dead():
+	return not alive
 
 func hit(direction):
 	damage += 1

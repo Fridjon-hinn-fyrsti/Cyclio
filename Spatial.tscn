@@ -9,37 +9,37 @@
 [ext_resource path="res://Camera.gd" type="Script" id=9]
 [ext_resource path="res://sky.hdr" type="Texture" id=12]
 
-[sub_resource type="PhysicsMaterial" id=7]
+[sub_resource type="PhysicsMaterial" id=1]
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="SphereMesh" id=2]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 2 )
-
-[sub_resource type="SphereShape" id=3]
 
 [sub_resource type="SphereShape" id=4]
 
-[sub_resource type="PanoramaSky" id=5]
+[sub_resource type="SphereShape" id=5]
+
+[sub_resource type="PanoramaSky" id=6]
 panorama = ExtResource( 12 )
 
-[sub_resource type="Environment" id=6]
+[sub_resource type="Environment" id=7]
 background_mode = 2
-background_sky = SubResource( 5 )
+background_sky = SubResource( 6 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 5 )
 
 [node name="Planet" type="StaticBody" parent="."]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
-physics_material_override = SubResource( 7 )
+physics_material_override = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Planet"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Planet"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 0.986202, 0.0346678, 0.161876, 0, 0.977827, -0.209414, -0.165547, 0.206524, 0.964335, 0, 104.638, 0 )
@@ -47,7 +47,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.742094, -0.0540349 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Camera" type="Camera" parent="Player"]
 transform = Transform( 0.966886, -0.026721, -0.253807, 0.0534444, 0.993653, 0.0989855, 0.249551, -0.109272, 0.962177, -0.243808, 4.5414, 4.27289 )
@@ -62,10 +62,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15582, 0 )
 transform = Transform( -0.978717, 0, 0.205214, 0, 1, 0, -0.205214, 0, -0.978717, 0.5234, -1.71401, 1.06149 )
 
 [node name="Skybox" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
+environment = SubResource( 7 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Skybox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 160.433 )
 
 [node name="Evil_bot" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 103.764, -18.5049 )
+
+[node name="Killcount" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 3, 3 )
+text = "asd"
+__meta__ = {
+"_edit_use_anchors_": false
+}
