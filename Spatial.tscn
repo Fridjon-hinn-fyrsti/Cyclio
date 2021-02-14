@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ak47-1.wav" type="AudioStream" id=1]
 [ext_resource path="res://Grass03_Base Color.jpg" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Camera.gd" type="Script" id=9]
 [ext_resource path="res://AK 47.gd" type="Script" id=10]
 [ext_resource path="res://Reload_gun.tres" type="Animation" id=11]
+[ext_resource path="res://sky.hdr" type="Texture" id=12]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -23,6 +24,13 @@ albedo_texture = ExtResource( 2 )
 [sub_resource type="CylinderMesh" id=4]
 
 [sub_resource type="SphereShape" id=5]
+
+[sub_resource type="PanoramaSky" id=6]
+panorama = ExtResource( 12 )
+
+[sub_resource type="Environment" id=7]
+background_mode = 2
+background_sky = SubResource( 6 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -83,3 +91,9 @@ cast_to = Vector3( 0, 0, -200 )
 anims/Aim_down_sights = ExtResource( 8 )
 anims/Fire_gun = ExtResource( 5 )
 anims/Reload_gun = ExtResource( 11 )
+
+[node name="Skybox" type="WorldEnvironment" parent="."]
+environment = SubResource( 7 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Skybox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 160.433 )
