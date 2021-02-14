@@ -11,20 +11,22 @@ onready var planet = get_parent().get_node("Planet")
 onready var camera1 = get_node("Camera")
 onready var gun1 = get_node("AK 47")
 	
+	
+	
+func fix_angle():
+	var planet_vector = (transform.origin - planet.transform.origin).normalized()
+	transform.basis.y = planet_vector
+	transform.basis.z = transform.basis.y.rotated(transform.basis.x, deg2rad(90))
+	transform.basis.x = transform.basis.y.cross(transform.basis.z)
+	transform = transform.orthonormalized()
+	
+	
 func _physics_process(_delta):
 	resolve_input()
 
 	velocity += get_relative_gravity()
 	move_and_slide(velocity)
-
-	var planet_vector = (transform.origin - get_parent().get_node("Planet").transform.origin).normalized()
-	var angle = planet_vector.angle_to(transform.basis.y)
-	transform.basis.y = planet_vector
-	if abs(velocity.project(transform.basis.x).dot(transform.basis.x)) > 0.1:
-		if velocity.project(transform.basis.x).dot(transform.basis.x) > 0:
-			angle *= -1
-		transform.basis.x = transform.basis.x.rotated(transform.basis.z, angle)
-	transform = transform.orthonormalized()
+	fix_angle()
 	velocity = Vector3.ZERO
 
 func get_relative_gravity():
