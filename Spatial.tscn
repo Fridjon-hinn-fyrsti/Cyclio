@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Character.gd" type="Script" id=1]
+[ext_resource path="res://Grass03_Base Color.jpg" type="Texture" id=2]
+[ext_resource path="res://Camera.gd" type="Script" id=3]
 
 [sub_resource type="SphereMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.301961, 0.603922, 0.192157, 1 )
+albedo_texture = ExtResource( 2 )
 
 [sub_resource type="SphereShape" id=3]
 
@@ -37,5 +40,6 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 shape = SubResource( 5 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0750451, 0.380718, 20.1691 )
+[node name="Camera" type="Camera" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 12.1064 )
+script = ExtResource( 3 )
