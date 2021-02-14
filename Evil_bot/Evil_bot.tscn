@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Evil_bot/MechaTrooper.png" type="Texture" id=1]
+[ext_resource path="res://Evil_bot/MechaTrooper.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+var velocity = Vector3(0,0,0)
+# Called when the node enters the scene tree for the first time.
+var rng = RandomNumberGenerator.new()
+func _ready():
+	rng.randomize()
+
+var damage = 0
+#onready var material = $MeshInstance.get_surface_material(0)
+#onready var color = material.albedo_color
+
+func hit(direction):
+	if damage < 1:
+		damage += 0.1
+			# mat1.albedo_color = Color(\"5f2121\")
+			
+		#material.albedo_color = Color(color.r, color.g - damage, color.b - damage)
+			# 48d4ff
+	else:
+		move_and_slide(-direction*5000)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+onready var planet = get_parent().get_node(\"Planet\")
+var move_force = 20
+func _process(delta):
+	var planet_vector = (transform.origin - planet.transform.origin).normalized()
+	var angle = planet_vector.angle_to(transform.basis.y)
+	transform.basis = transform.basis.orthonormalized()
+	
+	if rng.randf_range(-10.0, 10.0) < 5:
+		velocity -= move_force* global_transform.basis.z
+		
+	if rng.randf_range(-10.0, 10.0) < 5:
+		velocity += move_force* global_transform.basis.z
+
+	if rng.randf_range(-10.0, 10.0) < 5:
+		velocity -= move_force* global_transform.basis.x
+
+	if rng.randf_range(-10.0, 10.0) < 5:
+		velocity += move_force* global_transform.basis.x
+	move_and_slide(velocity)
+	velocity = Vector3(0,0,0)
+	#add_central_force(velocity)
+	#velocity = Vector3(0,0,0)
+"
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.55769, 3.43149, 1.86588 )
+
+[node name="Evil_bot" type="KinematicBody" groups=[
+"Enemies",
+]]
+script = SubResource( 1 )
+
+[node name="MechaTrooper" type="MeshInstance" parent="." groups=[
+"Enemies",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0674124, 0.0650934, 0.0672171 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="." groups=[
+"Enemies",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50367, 0.258316 )
+shape = SubResource( 3 )
