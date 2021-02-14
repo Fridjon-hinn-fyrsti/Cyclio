@@ -10,6 +10,7 @@ onready var raycast = get_node("Model/RayCast")
 onready var bullet_counter = get_node("Bullet_counter")
 
 var bullets = 30
+var focused = false
 
 func shoot():
 	if not reloadsound.playing:
@@ -36,23 +37,32 @@ func reload():
 		reloadsound.play()
 		bullets = 30
 		update_counter()
+		
+func is_scoped():
+	return get_node("FPS_camera").current
+	
+func is_focused():
+	return focused
+		
+func focus(on):
+	if is_scoped():
+		if on:
+			animator.play("Focus")
+			focused = true
+		elif is_focused():
+			animator.play_backwards("Focus")
+			focused = false
 
 func reset_rotation():
 	rotation.x = x_rot
 		
 		
 func _input(event):
-	if event is InputEventMouseMotion and get_node("FPS_camera").current:
+	if event is InputEventMouseMotion and is_scoped():
 		var movement = event.relative
 		var sensitivity = 0.1
 		rotation.x -= deg2rad(movement.y * sensitivity) #*cos(rotation.z)
 		#rotation.y -= deg2rad(movement.x * sensitivity)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	pass

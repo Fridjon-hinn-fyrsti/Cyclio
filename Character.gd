@@ -6,7 +6,6 @@ const jump_force = 200
 
 var gravity = Vector3.DOWN
 var velocity = Vector3()
-var scoped = false
 
 onready var planet = get_parent().get_node("Planet")
 onready var camera1 = get_node("Camera")
@@ -26,27 +25,30 @@ func get_relative_gravity():
 func resolve_input():
 	velocity = Vector3.ZERO
 	
-	if not scoped:
-		if Input.is_action_pressed("movement_forward"):
-			velocity -= move_force* global_transform.basis.z
-			
-		if Input.is_action_pressed("movement_backward"):
-			velocity += move_force* global_transform.basis.z
+	if Input.is_action_pressed("movement_forward"):
+		velocity -= move_force* global_transform.basis.z
+		
+	if Input.is_action_pressed("movement_backward"):
+		velocity += move_force* global_transform.basis.z
 
-		if Input.is_action_pressed("movement_left"):
-			velocity -= move_force* global_transform.basis.x
+	if Input.is_action_pressed("movement_left"):
+		velocity -= move_force* global_transform.basis.x
 
-		if Input.is_action_pressed("movement_right"):
-			velocity += move_force* global_transform.basis.x
-		#jump:
-		if Input.is_action_just_pressed("movement_jump"):
-			velocity += jump_force* global_transform.basis.y
+	if Input.is_action_pressed("movement_right"):
+		velocity += move_force* global_transform.basis.x
+	#jump:
+	if Input.is_action_just_pressed("movement_jump"):
+		velocity += jump_force* global_transform.basis.y
 
 	if Input.is_action_just_pressed("aim"):
 		gun1.get_node("FPS_camera").make_current()
 	if Input.is_action_just_released("aim"):
 		gun1.reset_rotation()
 		camera1.make_current()
+	if Input.is_action_just_pressed("focus"):
+		gun1.focus(true)
+	if Input.is_action_just_released("focus"):
+		gun1.focus(false)
 	if Input.is_action_pressed("fire"):
 		gun1.shoot()
 	if Input.is_action_just_pressed("reload"):
