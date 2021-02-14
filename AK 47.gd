@@ -5,6 +5,7 @@ onready var emptyclip = get_node("Empty_clip")
 onready var reloadsound = get_node("Reload")
 onready var animator = get_parent().get_node("AnimationPlayer")
 onready var raycast = get_node("RayCast")
+onready var bullet_counter = get_node("Bullet_counter")
 
 var bullets = 30
 
@@ -13,6 +14,7 @@ func shoot():
 		if bullets > 0:
 			if not animator.is_playing():
 				bullets -= 1
+				update_counter()
 				gunfire.play()
 				if raycast.is_colliding():
 					var target = raycast.get_collider()
@@ -23,12 +25,15 @@ func shoot():
 			if not emptyclip.playing:
 				emptyclip.play()
 
+func update_counter():
+	bullet_counter.text = "%s/30" % bullets
 
 func reload():
 	if not reloadsound.playing:
 		animator.play("Reload_gun")
 		reloadsound.play()
 		bullets = 30
+		update_counter()
 
 
 # Called when the node enters the scene tree for the first time.

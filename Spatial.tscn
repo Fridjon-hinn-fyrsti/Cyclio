@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ak47-1.wav" type="AudioStream" id=1]
 [ext_resource path="res://Grass03_Base Color.jpg" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Fire_gun.tres" type="Animation" id=5]
 [ext_resource path="res://Character.gd" type="Script" id=6]
 [ext_resource path="res://AK 47.fbx" type="PackedScene" id=7]
-[ext_resource path="res://Aim_down_sights.tres" type="Animation" id=8]
 [ext_resource path="res://Camera.gd" type="Script" id=9]
 [ext_resource path="res://AK 47.gd" type="Script" id=10]
 [ext_resource path="res://Reload_gun.tres" type="Animation" id=11]
@@ -58,10 +57,10 @@ shape = SubResource( 5 )
 [node name="Camera" type="Camera" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 0.994379, 0.105882, 0, -0.105882, 0.994379, 0, 0.33987, 10.0588 )
 fov = 90.0
+far = 250.0
 script = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-anims/Aim_down_sights = ExtResource( 8 )
 anims/Fire_gun = ExtResource( 5 )
 anims/Reload_gun = ExtResource( 11 )
 
@@ -104,6 +103,17 @@ spot_angle = 135.8
 [node name="FPS_camera" type="Camera" parent="Player/AK 47"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.265, 0.414, -0.326 )
 fov = 60.0
+
+[node name="Bullet_counter" type="Label" parent="Player/AK 47"]
+margin_left = 930.0
+margin_top = 547.0
+margin_right = 1009.0
+margin_bottom = 581.0
+text = "30/30"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Skybox" type="WorldEnvironment" parent="."]
 environment = SubResource( 7 )

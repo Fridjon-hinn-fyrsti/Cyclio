@@ -22,7 +22,8 @@ _global_script_class_icons={
 
 config/name="Cyclio"
 run/main_scene="res://Spatial.tscn"
-boot_splash/bg_color=Color( 0.384314, 0.164706, 0.352941, 1 )
+boot_splash/image="res://logo.png"
+boot_splash/bg_color=Color( 0.705882, 0.705882, 0.705882, 1 )
 config/icon="res://icon.png"
 
 [gdnative]
