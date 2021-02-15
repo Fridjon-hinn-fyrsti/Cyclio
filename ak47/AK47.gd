@@ -5,7 +5,8 @@ var x_rot = rotation.x
 onready var gunfire = get_node("Fire_gun")
 onready var emptyclip = get_node("Empty_clip")
 onready var reloadsound = get_node("Reload")
-onready var animator = get_node("AnimationPlayer")
+onready var model_animator = get_node("ModelAnimator")
+onready var camera_animator = get_node("CameraAnimator")
 onready var raycast = get_node("Model/RayCast")
 onready var bullet_counter = get_node("Bullet_counter")
 
@@ -15,7 +16,7 @@ var focused = false
 func shoot():
 	if not reloadsound.playing:
 		if bullets > 0:
-			if not animator.is_playing():
+			if not model_animator.is_playing():
 				bullets -= 1
 				update_counter()
 				gunfire.play()
@@ -24,9 +25,9 @@ func shoot():
 					if target.is_in_group("Enemies"):
 						target.hit(raycast.get_collision_normal())
 				if focused:
-					animator.play("Focused_fire")
+					model_animator.play("Focused_fire")
 				else:
-					animator.play("Fire_gun")
+					model_animator.play("Fire_gun")
 		else:
 			if not emptyclip.playing:
 				emptyclip.play()
@@ -35,8 +36,8 @@ func update_counter():
 	bullet_counter.text = "%s/30" % bullets
 
 func reload():
-	if not reloadsound.playing:
-		animator.play("Reload_gun")
+	if not reloadsound.playing and not model_animator.is_playing():
+		model_animator.play("Reload_gun")
 		reloadsound.play()
 		bullets = 30
 		update_counter()
@@ -48,14 +49,11 @@ func is_focused():
 	return focused
 		
 func focus(on):
-	if reloadsound.playing:
-		print_debug("eyeye")
-		animator.play("Reset")
 	if on:
-		animator.play("Focus")
+		camera_animator.play("Focus")
 		focused = true
 	else:
-		animator.play_backwards("Focus")
+		camera_animator.play_backwards("Focus")
 		focused = false
 
 func reset_rotation():

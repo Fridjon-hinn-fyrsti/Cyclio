@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ak47/AK47.gd" type="Script" id=1]
 [ext_resource path="res://ak47/AK 47.fbx" type="PackedScene" id=2]
@@ -7,39 +7,9 @@
 [ext_resource path="res://ak47/ak47-1.wav" type="AudioStream" id=5]
 [ext_resource path="res://ak47/Reload_gun.tres" type="Animation" id=6]
 [ext_resource path="res://ak47/Fire_gun.tres" type="Animation" id=7]
-
-
-
+[ext_resource path="res://ak47/Focus.tres" type="Animation" id=8]
 
 [sub_resource type="Animation" id=1]
-resource_name = "Focus"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("FPS_camera:fov")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.5, 0.5 ),
-"update": 0,
-"values": [ 60.0, 20.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("FPS_camera:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.5, 0.5 ),
-"update": 0,
-"values": [ Vector3( 1.265, 0.283, -0.326 ), Vector3( 1.265, 0.283, -0.61 ) ]
-}
-
-[sub_resource type="Animation" id=2]
 resource_name = "Focused_fire"
 length = 0.1
 step = 0.01
@@ -78,47 +48,6 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 12.0, 0.0 ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "Reset"
-length = 0.001
-step = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Model:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.26, -0.349, -0.519 ), Vector3( 1.26, -0.349, -0.519 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Model:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Muzzle_flash:light_energy")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0 ]
 }
 
 [node name="AK 47" type="Spatial"]
@@ -174,9 +103,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="ModelAnimator" type="AnimationPlayer" parent="."]
 anims/Fire_gun = ExtResource( 7 )
-anims/Focus = SubResource( 1 )
-anims/Focused_fire = SubResource( 2 )
+anims/Focused_fire = SubResource( 1 )
 anims/Reload_gun = ExtResource( 6 )
-anims/Reset = SubResource( 3 )
+
+[node name="CameraAnimator" type="AnimationPlayer" parent="."]
+anims/Focus = ExtResource( 8 )
